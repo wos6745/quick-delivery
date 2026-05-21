@@ -1,5 +1,6 @@
 package com.woosung.quick.delivery.controller;
 
+import com.woosung.quick.delivery.global.QuickDeliveryResponse;
 import com.woosung.quick.delivery.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +17,12 @@ public class OrderController {
     public final OrderService orderService;
 
     @GetMapping
-    public String getOrders() {
-        return "Orders List";
+    public QuickDeliveryResponse getOrders() {
+        return QuickDeliveryResponse.builder().build();
     }
 
     @GetMapping(path = "/{orderId}")
-    public String getOrders(@PathVariable("orderId") long orderId) {
-        return MessageFormat.format("Order: {0}", orderId);
+    public QuickDeliveryResponse getOrders(@PathVariable("orderId") long orderId) {
+        return QuickDeliveryResponse.builder().build();
     }
 }
