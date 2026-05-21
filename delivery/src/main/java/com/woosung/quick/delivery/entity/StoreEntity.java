@@ -28,4 +28,14 @@ public class StoreEntity extends JpaBaseTimeEntity {
 
     @OneToMany(mappedBy = "store")
     private List<StoreMenuEntity> storyMenuList = new ArrayList<>();
+
+    public static StoreEntity of(String name, String address, String phone, String desc, Long fee) {
+        return StoreEntity.builder()
+                .storeName(name)
+                .storeAddress(address)
+                .storePhoneNumber(phone)
+                .storeDescription(desc)
+                .deliveryFee(fee)
+                .build();
+    }
 }

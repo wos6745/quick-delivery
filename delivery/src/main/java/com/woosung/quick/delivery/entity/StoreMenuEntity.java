@@ -23,4 +23,12 @@ public class StoreMenuEntity extends JpaBaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private StoreEntity store;
+
+    public static StoreMenuEntity of(StoreEntity store, String menuName, Long menuPrice) {
+        return StoreMenuEntity.builder()
+                .menuName(menuName)
+                .menuPrice(menuPrice)
+                .store(store)
+                .build();
+    }
 }
