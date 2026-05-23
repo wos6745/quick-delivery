@@ -31,6 +31,6 @@ public class OrderStoreEntity extends JpaBaseTimeEntity {
     @JoinColumn(name="store_id")
     private StoreEntity store;
 
-    @OneToMany(mappedBy = "orderStore")
+    @OneToMany(mappedBy = "orderStore", fetch = FetchType.LAZY)
     private List<OrderItemEntity> orderItemEntityList = new ArrayList<>();
 }

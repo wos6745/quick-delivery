@@ -33,6 +33,6 @@ public class OrderEntity extends JpaBaseTimeEntity {
     private String customerPhoneNumber;
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderStoreEntity> storeList = new ArrayList<>();
 }
