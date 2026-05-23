@@ -19,4 +19,19 @@ public interface Supports {
             this.infoMessage = infoMessage;
         }
     }
+
+    enum OrderStatus {
+        PENDING(100),
+        CANCELED(101),
+        ACCEPTED(102),
+        DELIVERING(200),
+        DELIVERED(201);
+
+        @Getter
+        private final int status;
+
+        OrderStatus(int status) {
+            this.status = status;
+        }
+    }
 }
