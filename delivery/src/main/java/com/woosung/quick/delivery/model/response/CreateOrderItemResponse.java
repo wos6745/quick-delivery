@@ -1,4 +1,10 @@
 package com.woosung.quick.delivery.model.response;
 
-public class CreateOrderItemResponse {
-}
+import lombok.Builder;
+
+@Builder
+public record CreateOrderItemResponse (
+        Long id,
+        boolean result
+)
+{ }
