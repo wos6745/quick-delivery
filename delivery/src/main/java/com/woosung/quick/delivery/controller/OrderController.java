@@ -1,17 +1,14 @@
 package com.woosung.quick.delivery.controller;
 
 import com.woosung.quick.delivery.global.QuickDeliveryResponse;
-import com.woosung.quick.delivery.global.Supports;
 import com.woosung.quick.delivery.global.Supports.ResultCode;
-import com.woosung.quick.delivery.model.response.CancelOrderResponse;
-import com.woosung.quick.delivery.model.response.CreateOrderResponse;
-import com.woosung.quick.delivery.payload.request.CancelOrderRequest;
-import com.woosung.quick.delivery.payload.request.CreateOrderRequest;
+import com.woosung.quick.delivery.payload.request.OrderRequest;
 import com.woosung.quick.delivery.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.MessageFormat;
+import static com.woosung.quick.delivery.model.response.OrderResponse.*;
+import static com.woosung.quick.delivery.payload.request.OrderRequest.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +17,7 @@ public class OrderController {
     public final OrderService orderService;
 
     @GetMapping
-    public QuickDeliveryResponse getOrders() {
+    public QuickDeliveryResponse getOrders(@RequestParam(name = "customerId") String customerId) {
         return QuickDeliveryResponse.builder().build();
     }
 

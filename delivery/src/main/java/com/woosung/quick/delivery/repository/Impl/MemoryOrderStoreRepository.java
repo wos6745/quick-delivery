@@ -3,8 +3,7 @@ package com.woosung.quick.delivery.repository.Impl;
 import com.woosung.quick.delivery.entity.OrderEntity;
 import com.woosung.quick.delivery.entity.OrderStoreEntity;
 import com.woosung.quick.delivery.entity.StoreEntity;
-import com.woosung.quick.delivery.model.command.CreateOrderStoreCommand;
-import com.woosung.quick.delivery.model.response.CreateOrderStoreResponse;
+import com.woosung.quick.delivery.model.command.OrderCommand;
 import com.woosung.quick.delivery.repository.OrderStoreRepository;
 import com.woosung.quick.delivery.repository.jpa.OrderJpaRepository;
 import com.woosung.quick.delivery.repository.jpa.OrderStoreJpaRepository;
@@ -13,7 +12,8 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import static com.woosung.quick.delivery.model.command.OrderCommand.*;
+import static com.woosung.quick.delivery.model.response.OrderResponse.*;
 
 @Repository
 @RequiredArgsConstructor

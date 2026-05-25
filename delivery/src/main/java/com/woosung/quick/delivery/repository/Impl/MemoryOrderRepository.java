@@ -1,22 +1,26 @@
 package com.woosung.quick.delivery.repository.Impl;
 
 import com.woosung.quick.delivery.entity.OrderEntity;
-import com.woosung.quick.delivery.global.Supports;
-import com.woosung.quick.delivery.model.command.CancelOrderCommand;
-import com.woosung.quick.delivery.model.command.CreateOrderCommand;
-import com.woosung.quick.delivery.model.response.CancelOrderResponse;
-import com.woosung.quick.delivery.model.response.CreateOrderResponse;
+import com.woosung.quick.delivery.model.query.OrderQuery;
 import com.woosung.quick.delivery.repository.OrderRepository;
 import com.woosung.quick.delivery.repository.jpa.OrderJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import static com.woosung.quick.delivery.global.Supports.*;
+import static com.woosung.quick.delivery.model.command.OrderCommand.*;
+import static com.woosung.quick.delivery.model.query.OrderQuery.*;
+import static com.woosung.quick.delivery.model.response.OrderResponse.*;
 
 @Repository
 @RequiredArgsConstructor
 public class MemoryOrderRepository implements OrderRepository {
     private final OrderJpaRepository orderJpaRepository;
+
+    @Override
+    public GetOrdersResponse selectOrders(SelectOrdersQuery query) {
+        return null;
+    }
 
     @Override
     public CreateOrderResponse insertOrder(CreateOrderCommand command) {
