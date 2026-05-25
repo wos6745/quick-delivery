@@ -9,5 +9,5 @@ import com.woosung.quick.delivery.payload.request.CreateOrderRequest;
 public interface OrderService {
     CreateOrderResponse createOrder(CreateOrderRequest req);
     CancelOrderResponse cancelOrderByStore(CancelOrderCommand command);
-    CancelOrderResponse cancelOrderByCustomer(CancelOrderRequest req);
+    CancelOrderResponse cancelOrderByCustomer(CancelOrderRequest req, Long orderId);
 }

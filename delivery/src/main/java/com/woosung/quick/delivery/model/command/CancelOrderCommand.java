@@ -11,10 +11,10 @@ public record CancelOrderCommand (
         OrderStatus orderStatus
 )
 {
-    public static CancelOrderCommand of(CancelOrderRequest req) {
+    public static CancelOrderCommand of(CancelOrderRequest req, Long orderId) {
         return CancelOrderCommand.builder()
                 .cancelMessage(req.cancelMessage())
-                .orderId(req.orderId())
+                .orderId(orderId)
                 .orderStatus(req.orderStatus())
                 .build();
     }

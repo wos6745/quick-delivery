@@ -46,8 +46,8 @@ public class DefaultOrderService implements OrderService {
     }
 
     @Override
-    public CancelOrderResponse cancelOrderByCustomer(CancelOrderRequest req) {
-        CancelOrderCommand command = CancelOrderCommand.of(req);
+    public CancelOrderResponse cancelOrderByCustomer(CancelOrderRequest req, Long orderId) {
+        CancelOrderCommand command = CancelOrderCommand.of(req, orderId);
         return orderRepository.cancelOrder(command);
     }
 }

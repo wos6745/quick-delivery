@@ -3,6 +3,7 @@ package com.woosung.quick.delivery.controller;
 import com.woosung.quick.delivery.global.QuickDeliveryResponse;
 import com.woosung.quick.delivery.global.Supports;
 import com.woosung.quick.delivery.global.Supports.ResultCode;
+import com.woosung.quick.delivery.model.response.CancelOrderResponse;
 import com.woosung.quick.delivery.model.response.CreateOrderResponse;
 import com.woosung.quick.delivery.payload.request.CancelOrderRequest;
 import com.woosung.quick.delivery.payload.request.CreateOrderRequest;
@@ -39,8 +40,10 @@ public class OrderController {
 
     }
 
-    public QuickDeliveryResponse cancelOrder(@RequestBody CancelOrderRequest req) {
-
+    @PatchMapping(path = "/{orderId}")
+    public QuickDeliveryResponse cancelOrder(@RequestBody CancelOrderRequest req,
+                                             @PathVariable("orderId") Long orderId) {
+        CancelOrderResponse result = orderService.cancelOrderByCustomer(req, orderId);
 
         return QuickDeliveryResponse.builder()
                 .code(ResultCode.SUCCESS.getCode())
