@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface OrderJpaRepository extends JpaRepository<OrderEntity, Long> {
     @Query(value = "SELECT NEXT VALUE FOR SEQ_ORDER_BUSINESS_ID", nativeQuery = true)
     Long getNextOrderSequence();
+
+    OrderEntity getOrderEntityByOrderId(Long orderId);
 }

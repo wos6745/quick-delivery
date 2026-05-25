@@ -4,6 +4,7 @@ import com.woosung.quick.delivery.global.QuickDeliveryResponse;
 import com.woosung.quick.delivery.global.Supports;
 import com.woosung.quick.delivery.global.Supports.ResultCode;
 import com.woosung.quick.delivery.model.response.CreateOrderResponse;
+import com.woosung.quick.delivery.payload.request.CancelOrderRequest;
 import com.woosung.quick.delivery.payload.request.CreateOrderRequest;
 import com.woosung.quick.delivery.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +37,15 @@ public class OrderController {
                 .data(result)
                 .build();
 
+    }
+
+    public QuickDeliveryResponse cancelOrder(@RequestBody CancelOrderRequest req) {
+
+
+        return QuickDeliveryResponse.builder()
+                .code(ResultCode.SUCCESS.getCode())
+                .message(ResultCode.SUCCESS.getInfoMessage())
+                .data(result)
+                .build();
     }
 }

@@ -1,8 +1,11 @@
 package com.woosung.quick.delivery.service.Impl;
 
+import com.woosung.quick.delivery.model.command.CancelOrderCommand;
 import com.woosung.quick.delivery.model.command.CreateOrderCommand;
 import com.woosung.quick.delivery.model.command.CreateOrderStoreCommand;
+import com.woosung.quick.delivery.model.response.CancelOrderResponse;
 import com.woosung.quick.delivery.model.response.CreateOrderResponse;
+import com.woosung.quick.delivery.payload.request.CancelOrderRequest;
 import com.woosung.quick.delivery.payload.request.CreateOrderRequest;
 import com.woosung.quick.delivery.repository.OrderItemRepository;
 import com.woosung.quick.delivery.repository.OrderRepository;
@@ -35,5 +38,16 @@ public class DefaultOrderService implements OrderService {
         return CreateOrderResponse.builder()
                 .result(true)
                 .build();
+    }
+
+    @Override
+    public CancelOrderResponse cancelOrderByStore(CancelOrderCommand command) {
+        return orderRepository.cancelOrder(command);
+    }
+
+    @Override
+    public CancelOrderResponse cancelOrderByCustomer(CancelOrderRequest req) {
+        CancelOrderCommand command = CancelOrderCommand.of(req);
+        return orderRepository.cancelOrder(command);
     }
 }

@@ -22,10 +22,11 @@ public interface Supports {
 
     enum OrderStatus {
         PENDING(100),
-        CANCELED(101),
-        ACCEPTED(102),
-        DELIVERING(200),
-        DELIVERED(201);
+        CANCELED_STORE(200),
+        CANCELED_CUSTOMER(201),
+        ACCEPTED(300),
+        DELIVERING(400),
+        DELIVERED(500);
 
         @Getter
         private final int status;
