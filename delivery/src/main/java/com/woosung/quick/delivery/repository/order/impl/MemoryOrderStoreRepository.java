@@ -1,15 +1,14 @@
-package com.woosung.quick.delivery.repository.Impl;
+package com.woosung.quick.delivery.repository.order.impl;
 
-import com.woosung.quick.delivery.common.model.command.OrderCommand;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderStoreCommand;
 import com.woosung.quick.delivery.entity.OrderEntity;
 import com.woosung.quick.delivery.entity.OrderStoreEntity;
 import com.woosung.quick.delivery.entity.StoreEntity;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderStoreResult;
-import com.woosung.quick.delivery.repository.OrderStoreRepository;
-import com.woosung.quick.delivery.repository.jpa.OrderJpaRepository;
-import com.woosung.quick.delivery.repository.jpa.OrderStoreJpaRepository;
-import com.woosung.quick.delivery.repository.jpa.StoreJpaRepository;
+import com.woosung.quick.delivery.repository.order.OrderStoreRepository;
+import com.woosung.quick.delivery.repository.order.jpa.OrderJpaRepository;
+import com.woosung.quick.delivery.repository.order.jpa.OrderStoreJpaRepository;
+import com.woosung.quick.delivery.repository.order.jpa.StoreJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

@@ -3,7 +3,7 @@ package com.woosung.quick.delivery.controller;
 import com.woosung.quick.delivery.global.QuickDeliveryResponse;
 import com.woosung.quick.delivery.common.Supports.ResultCode;
 
-import com.woosung.quick.delivery.service.OrderService;
+import com.woosung.quick.delivery.service.order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

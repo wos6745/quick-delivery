@@ -1,4 +1,4 @@
-package com.woosung.quick.delivery.repository.Impl;
+package com.woosung.quick.delivery.repository.order.impl;
 
 import com.woosung.quick.delivery.entity.OrderEntity;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderDTO;
@@ -7,9 +7,9 @@ import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrdersD
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrdersResult;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderResult;
-import com.woosung.quick.delivery.repository.OrderRepository;
-import com.woosung.quick.delivery.repository.jpa.OrderJpaRepository;
-import com.woosung.quick.delivery.repository.jpa.querydsl.JpaQueryOrderRepository;
+import com.woosung.quick.delivery.repository.order.OrderRepository;
+import com.woosung.quick.delivery.repository.order.jpa.OrderJpaRepository;
+import com.woosung.quick.delivery.repository.order.jpa.querydsl.JpaQueryOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

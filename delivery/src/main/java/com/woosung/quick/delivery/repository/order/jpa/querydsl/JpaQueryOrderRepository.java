@@ -1,10 +1,10 @@
-package com.woosung.quick.delivery.repository.jpa.querydsl;
+package com.woosung.quick.delivery.repository.order.jpa.querydsl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderDTO;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrdersDTO;
-import com.woosung.quick.delivery.model.read.QOrderReadModel_SelectOrderDTO;
-import com.woosung.quick.delivery.model.read.QOrderReadModel_SelectOrdersDTO;
+import com.woosung.quick.delivery.common.model.read.QOrderReadModel_SelectOrderDTO;
+import com.woosung.quick.delivery.common.model.read.QOrderReadModel_SelectOrdersDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

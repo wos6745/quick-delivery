@@ -1,4 +1,4 @@
-package com.woosung.quick.delivery.repository.jpa;
+package com.woosung.quick.delivery.repository.order.jpa;
 
 import com.woosung.quick.delivery.entity.StoreEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

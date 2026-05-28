@@ -1,6 +1,5 @@
-package com.woosung.quick.delivery.service.Impl;
+package com.woosung.quick.delivery.service.order.impl;
 
-import com.woosung.quick.delivery.common.model.command.OrderCommand;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CancelOrderCommand;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderCommand;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderStoreCommand;
@@ -13,9 +12,9 @@ import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrder
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderResult;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrderResponse;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrdersResponse;
-import com.woosung.quick.delivery.repository.OrderRepository;
-import com.woosung.quick.delivery.service.OrderService;
-import com.woosung.quick.delivery.service.OrderStoreService;
+import com.woosung.quick.delivery.repository.order.OrderRepository;
+import com.woosung.quick.delivery.service.order.OrderService;
+import com.woosung.quick.delivery.service.order.OrderStoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;

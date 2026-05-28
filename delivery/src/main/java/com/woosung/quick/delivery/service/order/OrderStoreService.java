@@ -1,4 +1,4 @@
-package com.woosung.quick.delivery.service;
+package com.woosung.quick.delivery.service.order;
 
 import com.woosung.quick.delivery.common.model.command.OrderCommand;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderStoreCommand;

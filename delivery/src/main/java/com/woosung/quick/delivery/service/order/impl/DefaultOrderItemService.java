@@ -1,9 +1,8 @@
-package com.woosung.quick.delivery.service.Impl;
+package com.woosung.quick.delivery.service.order.impl;
 
-import com.woosung.quick.delivery.common.model.command.OrderCommand;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderItemCommand;
-import com.woosung.quick.delivery.repository.OrderItemRepository;
-import com.woosung.quick.delivery.service.OrderItemService;
+import com.woosung.quick.delivery.repository.order.OrderItemRepository;
+import com.woosung.quick.delivery.service.order.OrderItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

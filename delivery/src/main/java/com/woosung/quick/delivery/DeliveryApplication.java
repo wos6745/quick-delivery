@@ -2,8 +2,8 @@ package com.woosung.quick.delivery;
 
 import com.woosung.quick.delivery.entity.StoreEntity;
 import com.woosung.quick.delivery.entity.StoreMenuEntity;
-import com.woosung.quick.delivery.repository.jpa.StoreMenuJpaRepository;
-import com.woosung.quick.delivery.repository.jpa.StoreJpaRepository;
+import com.woosung.quick.delivery.repository.order.jpa.StoreMenuJpaRepository;
+import com.woosung.quick.delivery.repository.order.jpa.StoreJpaRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
