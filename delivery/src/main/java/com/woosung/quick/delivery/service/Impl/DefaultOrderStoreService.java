@@ -1,7 +1,9 @@
 package com.woosung.quick.delivery.service.Impl;
 
-import com.woosung.quick.delivery.model.write.OrderWriteModel;
-import com.woosung.quick.delivery.model.write.OrderWriteModel.CreateOrderStoreResult;
+import com.woosung.quick.delivery.common.model.command.OrderCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderItemCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderStoreCommand;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderStoreResult;
 import com.woosung.quick.delivery.repository.OrderStoreRepository;
 import com.woosung.quick.delivery.service.OrderItemService;
 import com.woosung.quick.delivery.service.OrderStoreService;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.woosung.quick.delivery.model.command.OrderCommand.*;
 import static com.woosung.quick.delivery.payload.response.OrderResponse.*;
 
 @Service

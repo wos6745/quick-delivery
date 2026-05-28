@@ -1,4 +1,4 @@
-package com.woosung.quick.delivery.model.write;
+package com.woosung.quick.delivery.common.model.write;
 
 import lombok.Builder;
 

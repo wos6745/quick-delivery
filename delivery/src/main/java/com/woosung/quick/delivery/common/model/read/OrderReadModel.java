@@ -1,7 +1,7 @@
-package com.woosung.quick.delivery.model.read;
+package com.woosung.quick.delivery.common.model.read;
 
 import com.querydsl.core.annotations.QueryProjection;
-import com.woosung.quick.delivery.global.Supports.OrderStatus;
+import com.woosung.quick.delivery.common.Supports.OrderStatus;
 import lombok.Builder;
 
 import java.util.List;

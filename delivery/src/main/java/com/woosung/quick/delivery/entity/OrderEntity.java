@@ -1,8 +1,8 @@
 package com.woosung.quick.delivery.entity;
 
 
+import com.woosung.quick.delivery.common.model.command.OrderCommand.CancelOrderCommand;
 import com.woosung.quick.delivery.entity.base.JpaBaseTimeEntity;
-import com.woosung.quick.delivery.model.command.OrderCommand;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -13,8 +13,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.woosung.quick.delivery.global.Supports.*;
-import static com.woosung.quick.delivery.model.command.OrderCommand.*;
+import static com.woosung.quick.delivery.common.Supports.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity

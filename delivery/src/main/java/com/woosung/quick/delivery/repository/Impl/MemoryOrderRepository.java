@@ -1,13 +1,12 @@
 package com.woosung.quick.delivery.repository.Impl;
 
 import com.woosung.quick.delivery.entity.OrderEntity;
-import com.woosung.quick.delivery.model.read.OrderReadModel;
-import com.woosung.quick.delivery.model.read.OrderReadModel.SelectOrderDTO;
-import com.woosung.quick.delivery.model.read.OrderReadModel.SelectOrderResult;
-import com.woosung.quick.delivery.model.read.OrderReadModel.SelectOrdersDTO;
-import com.woosung.quick.delivery.model.read.OrderReadModel.SelectOrdersResult;
-import com.woosung.quick.delivery.model.write.OrderWriteModel.CancelOrderResult;
-import com.woosung.quick.delivery.model.write.OrderWriteModel.CreateOrderResult;
+import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderDTO;
+import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderResult;
+import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrdersDTO;
+import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrdersResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderResult;
 import com.woosung.quick.delivery.repository.OrderRepository;
 import com.woosung.quick.delivery.repository.jpa.OrderJpaRepository;
 import com.woosung.quick.delivery.repository.jpa.querydsl.JpaQueryOrderRepository;
@@ -16,9 +15,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.woosung.quick.delivery.global.Supports.*;
-import static com.woosung.quick.delivery.model.command.OrderCommand.*;
-import static com.woosung.quick.delivery.model.query.OrderQuery.*;
+import static com.woosung.quick.delivery.common.model.command.OrderCommand.*;
+import static com.woosung.quick.delivery.common.model.query.OrderQuery.*;
+import static com.woosung.quick.delivery.common.Supports.*;
 
 @Repository
 @RequiredArgsConstructor

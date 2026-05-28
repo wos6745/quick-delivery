@@ -1,15 +1,16 @@
 package com.woosung.quick.delivery.service.Impl;
 
-import com.woosung.quick.delivery.model.info.OrderInfo;
-import com.woosung.quick.delivery.model.info.StoreInfo;
-import com.woosung.quick.delivery.model.query.OrderQuery;
-import com.woosung.quick.delivery.model.query.OrderQuery.SelectOrderQuery;
-import com.woosung.quick.delivery.model.query.OrderQuery.SelectOrdersQuery;
-import com.woosung.quick.delivery.model.read.OrderReadModel;
-import com.woosung.quick.delivery.model.read.OrderReadModel.*;
-import com.woosung.quick.delivery.model.write.OrderWriteModel.CancelOrderResult;
-import com.woosung.quick.delivery.model.write.OrderWriteModel.CreateOrderResult;
-import com.woosung.quick.delivery.payload.response.OrderResponse;
+import com.woosung.quick.delivery.common.model.command.OrderCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.CancelOrderCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderStoreCommand;
+import com.woosung.quick.delivery.common.model.info.OrderInfo;
+import com.woosung.quick.delivery.common.model.info.StoreInfo;
+import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrderQuery;
+import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrdersQuery;
+import com.woosung.quick.delivery.common.model.read.OrderReadModel.*;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderResult;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrderResponse;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrdersResponse;
 import com.woosung.quick.delivery.repository.OrderRepository;
@@ -24,7 +25,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.woosung.quick.delivery.model.command.OrderCommand.*;
 import static com.woosung.quick.delivery.payload.response.OrderResponse.CancelOrderResponse;
 import static com.woosung.quick.delivery.payload.response.OrderResponse.CreateOrderResponse;
 import static com.woosung.quick.delivery.payload.request.OrderRequest.*;

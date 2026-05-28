@@ -1,4 +1,4 @@
-package com.woosung.quick.delivery.model.query;
+package com.woosung.quick.delivery.common.model.query;
 
 import lombok.Builder;
 

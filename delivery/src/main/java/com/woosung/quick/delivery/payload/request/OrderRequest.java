@@ -1,13 +1,12 @@
 package com.woosung.quick.delivery.payload.request;
 
-import com.woosung.quick.delivery.global.Supports;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 
-import static com.woosung.quick.delivery.global.Supports.*;
+import static com.woosung.quick.delivery.common.Supports.*;
 
 public class OrderRequest {
     public record CancelOrderRequest (OrderStatus orderStatus, String cancelMessage) { }

@@ -1,7 +1,6 @@
-package com.woosung.quick.delivery.model.command;
+package com.woosung.quick.delivery.common.model.command;
 
-import com.woosung.quick.delivery.global.Supports;
-import com.woosung.quick.delivery.payload.request.OrderRequest;
+import com.woosung.quick.delivery.common.Supports;
 import lombok.Builder;
 
 import java.util.List;

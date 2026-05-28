@@ -1,6 +1,6 @@
-package com.woosung.quick.delivery.model.info;
+package com.woosung.quick.delivery.common.model.info;
 
-import com.woosung.quick.delivery.global.Supports.OrderStatus;
+import com.woosung.quick.delivery.common.Supports.OrderStatus;
 
 import java.util.Map;
 

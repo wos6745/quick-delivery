@@ -1,9 +1,8 @@
 package com.woosung.quick.delivery.repository;
 
-import com.woosung.quick.delivery.model.write.OrderWriteModel;
-import com.woosung.quick.delivery.model.write.OrderWriteModel.CreateOrderStoreResult;
-
-import static com.woosung.quick.delivery.model.command.OrderCommand.*;
+import com.woosung.quick.delivery.common.model.command.OrderCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderStoreCommand;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderStoreResult;
 
 public interface OrderStoreRepository {
     CreateOrderStoreResult insertOrderStore(CreateOrderStoreCommand command);

@@ -1,15 +1,12 @@
 package com.woosung.quick.delivery.payload.response;
 
-import com.woosung.quick.delivery.global.Supports;
-import com.woosung.quick.delivery.global.Supports.OrderStatus;
-import com.woosung.quick.delivery.model.info.StoreInfo;
-import com.woosung.quick.delivery.model.read.OrderReadModel;
-import com.woosung.quick.delivery.model.read.OrderReadModel.SelectOrderResult;
-import com.woosung.quick.delivery.model.write.OrderWriteModel;
-import com.woosung.quick.delivery.model.write.OrderWriteModel.CancelOrderResult;
-import com.woosung.quick.delivery.model.write.OrderWriteModel.CreateOrderItemResult;
-import com.woosung.quick.delivery.model.write.OrderWriteModel.CreateOrderResult;
-import com.woosung.quick.delivery.model.write.OrderWriteModel.CreateOrderStoreResult;
+import com.woosung.quick.delivery.common.Supports.OrderStatus;
+import com.woosung.quick.delivery.common.model.info.StoreInfo;
+import com.woosung.quick.delivery.common.model.read.OrderReadModel;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderItemResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderStoreResult;
 import lombok.Builder;
 
 import java.util.List;

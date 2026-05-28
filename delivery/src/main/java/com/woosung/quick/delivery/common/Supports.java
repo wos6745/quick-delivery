@@ -1,4 +1,4 @@
-package com.woosung.quick.delivery.global;
+package com.woosung.quick.delivery.common;
 
 import lombok.Getter;
 
@@ -6,8 +6,8 @@ public interface Supports {
     enum ResultCode {
 
         SUCCESS(20000, "성공"),
-        INTERNAL_SERVER_ERROR(50000, "알 수 없는 서버 에러");
-
+        INTERNAL_SERVER_ERROR(50000, "알 수 없는 서버 에러"),
+        ENTITY_NOT_FOUND(50001, "요청 하신 엔티티가 존재 하지 않습니다.");
 
         @Getter
         private final int code;

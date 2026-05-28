@@ -1,6 +1,6 @@
-package com.woosung.quick.delivery.model.info;
+package com.woosung.quick.delivery.common.model.info;
 
-import com.woosung.quick.delivery.model.read.OrderReadModel.OrderItemResult;
+import com.woosung.quick.delivery.common.model.read.OrderReadModel.OrderItemResult;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.woosung.quick.delivery.controller;
 
 import com.woosung.quick.delivery.global.QuickDeliveryResponse;
-import com.woosung.quick.delivery.global.Supports.ResultCode;
+import com.woosung.quick.delivery.common.Supports.ResultCode;
 
 import com.woosung.quick.delivery.service.OrderService;
 import lombok.RequiredArgsConstructor;

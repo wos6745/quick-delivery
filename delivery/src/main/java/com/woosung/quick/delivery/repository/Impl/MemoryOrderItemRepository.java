@@ -1,10 +1,11 @@
 package com.woosung.quick.delivery.repository.Impl;
 
+import com.woosung.quick.delivery.common.model.command.OrderCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderItemCommand;
 import com.woosung.quick.delivery.entity.OrderItemEntity;
 import com.woosung.quick.delivery.entity.OrderStoreEntity;
 import com.woosung.quick.delivery.entity.StoreMenuEntity;
-import com.woosung.quick.delivery.model.write.OrderWriteModel;
-import com.woosung.quick.delivery.model.write.OrderWriteModel.CreateOrderItemResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderItemResult;
 import com.woosung.quick.delivery.repository.OrderItemRepository;
 import com.woosung.quick.delivery.repository.jpa.OrderItemJpaRepository;
 import com.woosung.quick.delivery.repository.jpa.OrderStoreJpaRepository;
@@ -12,9 +13,6 @@ import com.woosung.quick.delivery.repository.jpa.StoreMenuJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
-import static com.woosung.quick.delivery.model.command.OrderCommand.*;
-import static com.woosung.quick.delivery.payload.response.OrderResponse.*;
 
 @Repository
 @RequiredArgsConstructor
