@@ -3,6 +3,7 @@ package com.woosung.quick.delivery.entity;
 import com.woosung.quick.delivery.entity.base.JpaBaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -32,5 +33,6 @@ public class OrderStoreEntity extends JpaBaseTimeEntity {
     private StoreEntity store;
 
     @OneToMany(mappedBy = "orderStore", fetch = FetchType.LAZY)
+    @Builder.Default
     private List<OrderItemEntity> orderItemEntityList = new ArrayList<>();
 }

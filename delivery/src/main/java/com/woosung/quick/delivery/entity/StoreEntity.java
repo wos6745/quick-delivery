@@ -3,6 +3,7 @@ package com.woosung.quick.delivery.entity;
 import com.woosung.quick.delivery.entity.base.JpaBaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -27,6 +28,7 @@ public class StoreEntity extends JpaBaseTimeEntity {
     private Long deliveryFee;
 
     @OneToMany(mappedBy = "store")
+    @Builder.Default
     private List<StoreMenuEntity> storyMenuList = new ArrayList<>();
 
     public static StoreEntity of(String name, String address, String phone, String desc, Long fee) {

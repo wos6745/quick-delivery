@@ -28,6 +28,7 @@ public class OrderCommand {
                     .customerName(req.customerName())
                     .customerId(req.customerId())
                     .customerName(req.customerName())
+                    .customerPhoneNumber(req.customerNumber())
                     .build();
         }
     }

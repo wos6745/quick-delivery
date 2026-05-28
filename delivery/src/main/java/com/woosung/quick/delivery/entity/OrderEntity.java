@@ -5,6 +5,7 @@ import com.woosung.quick.delivery.entity.base.JpaBaseTimeEntity;
 import com.woosung.quick.delivery.model.command.OrderCommand;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -36,6 +37,7 @@ public class OrderEntity extends JpaBaseTimeEntity {
     private String cancelMessage;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @Builder.Default
     private List<OrderStoreEntity> storeList = new ArrayList<>();
 
     public void cancelOrder(CancelOrderCommand command) {

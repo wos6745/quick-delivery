@@ -3,7 +3,8 @@ package com.woosung.quick.delivery.repository.Impl;
 import com.woosung.quick.delivery.entity.OrderItemEntity;
 import com.woosung.quick.delivery.entity.OrderStoreEntity;
 import com.woosung.quick.delivery.entity.StoreMenuEntity;
-import com.woosung.quick.delivery.model.command.OrderCommand;
+import com.woosung.quick.delivery.model.write.OrderWriteModel;
+import com.woosung.quick.delivery.model.write.OrderWriteModel.CreateOrderItemResult;
 import com.woosung.quick.delivery.repository.OrderItemRepository;
 import com.woosung.quick.delivery.repository.jpa.OrderItemJpaRepository;
 import com.woosung.quick.delivery.repository.jpa.OrderStoreJpaRepository;
@@ -13,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import static com.woosung.quick.delivery.model.command.OrderCommand.*;
-import static com.woosung.quick.delivery.model.response.OrderResponse.*;
+import static com.woosung.quick.delivery.payload.response.OrderResponse.*;
 
 @Repository
 @RequiredArgsConstructor
@@ -23,7 +24,7 @@ public class MemoryOrderItemRepository implements OrderItemRepository {
     private final StoreMenuJpaRepository storeMenuJpaRepository;
 
     @Override
-    public CreateOrderItemResponse insertOrderItem(CreateOrderItemCommand command) {
+    public CreateOrderItemResult insertOrderItem(CreateOrderItemCommand command) {
         Long orderItemId = orderItemJpaRepository.getNextOrderItemSequence();
         OrderStoreEntity orderStoreEntity = orderStoreJpaRepository.findById(command.orderStoreId())
                 .orElseThrow(EntityNotFoundException::new);
@@ -41,7 +42,7 @@ public class MemoryOrderItemRepository implements OrderItemRepository {
 
         OrderItemEntity result = orderItemJpaRepository.save(orderItemEntity);
 
-        return CreateOrderItemResponse.builder()
+        return CreateOrderItemResult.builder()
                 .id(result.getId())
                 .result(true)
                 .build();
