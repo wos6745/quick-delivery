@@ -1,9 +1,13 @@
 package com.woosung.quick.delivery.repository.payment.impl;
 
+import com.woosung.quick.delivery.common.model.command.PaymentCommand;
+import com.woosung.quick.delivery.common.model.command.PaymentCommand.UpdateBalanceCommand;
 import com.woosung.quick.delivery.common.model.query.PaymentQuery;
 import com.woosung.quick.delivery.common.model.query.PaymentQuery.SelectCustomerBalanceQuery;
 import com.woosung.quick.delivery.common.model.read.PaymentReadModel;
 import com.woosung.quick.delivery.common.model.read.PaymentReadModel.SelectCustomerBalanceResult;
+import com.woosung.quick.delivery.common.model.write.PaymentWriteModel;
+import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.UpdateCustomerBalanceResult;
 import com.woosung.quick.delivery.entity.CustomerWalletEntity;
 import com.woosung.quick.delivery.repository.payment.PaymentRepository;
 import com.woosung.quick.delivery.repository.payment.jpa.PaymentJpaRepository;
@@ -21,6 +25,19 @@ public class MemoryPaymentRepository implements PaymentRepository {
         CustomerWalletEntity customerWalletEntity = paymentJpaRepository.getCustomerWalletEntityByCustomerId(query.customerId());
 
         return SelectCustomerBalanceResult.builder()
+                .id(customerWalletEntity.getId())
+                .customerId(customerWalletEntity.getCustomerId())
+                .balance(customerWalletEntity.getPointBalance())
+                .build();
+    }
+
+    @Override
+    public UpdateCustomerBalanceResult updateCustomerBalance(UpdateBalanceCommand command) {
+        CustomerWalletEntity customerWalletEntity = paymentJpaRepository.getCustomerWalletEntityByCustomerId(command.customerId());
+
+        customerWalletEntity.deduct(command.point());
+
+        return UpdateCustomerBalanceResult.builder()
                 .id(customerWalletEntity.getId())
                 .customerId(customerWalletEntity.getCustomerId())
                 .balance(customerWalletEntity.getPointBalance())

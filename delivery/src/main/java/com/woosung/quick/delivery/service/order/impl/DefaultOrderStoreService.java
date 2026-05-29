@@ -8,6 +8,7 @@ import com.woosung.quick.delivery.service.order.OrderItemService;
 import com.woosung.quick.delivery.service.order.OrderStoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

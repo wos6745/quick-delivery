@@ -1,5 +1,8 @@
 package com.woosung.quick.delivery.entity;
 
+import com.woosung.quick.delivery.common.Supports;
+import com.woosung.quick.delivery.common.Supports.ErrorCode;
+import com.woosung.quick.delivery.common.exception.NotEnoughBalanceException;
 import com.woosung.quick.delivery.entity.base.JpaBaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -24,4 +27,12 @@ public class CustomerWalletEntity extends JpaBaseTimeEntity {
 
     @Version
     private Integer version;
+
+    public void deduct(Long point) {
+        if (this.pointBalance < point) {
+            throw new NotEnoughBalanceException(ErrorCode.NOT_ENOUGH_BALANCE);
+        }
+
+        this.pointBalance -= point;
+    }
 }

@@ -19,4 +19,13 @@ public class PaymentResponse {
                     .build();
         }
     }
+
+    @Builder
+    public record UsePointResponse(
+            Long id,
+            String customerId,
+            boolean result,
+            Long balance
+    ) {
+    }
 }

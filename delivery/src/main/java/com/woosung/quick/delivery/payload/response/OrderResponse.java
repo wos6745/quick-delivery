@@ -7,6 +7,8 @@ import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrder
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderItemResult;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderResult;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderStoreResult;
+import com.woosung.quick.delivery.payload.request.OrderRequest;
+import com.woosung.quick.delivery.payload.request.OrderRequest.CreateOrderItemRequest;
 import lombok.Builder;
 
 import java.util.List;
@@ -64,5 +66,9 @@ public class OrderResponse {
                     .result(result.result())
                     .build();
         }
+    }
+
+    @Builder
+    public record ValidateTotalPointResponse (boolean result, Long outputTotalPoints, Long inputTotalPoints) {
     }
 }

@@ -1,5 +1,6 @@
 package com.woosung.quick.delivery.global.advice;
 
+import com.woosung.quick.delivery.common.exception.NotEnoughBalanceException;
 import com.woosung.quick.delivery.global.QuickDeliveryResponse;
 import com.woosung.quick.delivery.common.Supports;
 import jakarta.persistence.EntityNotFoundException;
@@ -11,11 +12,19 @@ import static com.woosung.quick.delivery.common.Supports.*;
 @RestControllerAdvice
 public class GlobalExceptionHandler{
 
+    @ExceptionHandler(NotEnoughBalanceException.class)
+    protected QuickDeliveryResponse handleEntityNotEnoughBalanceException(NotEnoughBalanceException e) {
+        return QuickDeliveryResponse.builder()
+                .code(e.getCode())
+                .message(e.getMessage())
+                .build();
+    }
+
     @ExceptionHandler(EntityNotFoundException.class)
     protected QuickDeliveryResponse handleEntityNotFoundException(EntityNotFoundException e) {
         return QuickDeliveryResponse.builder()
-                .code(ResultCode.ENTITY_NOT_FOUND.getCode())
-                .message(ResultCode.ENTITY_NOT_FOUND.getInfoMessage())
+                .code(ErrorCode.ENTITY_NOT_FOUND.getCode())
+                .message(ErrorCode.ENTITY_NOT_FOUND.getInfoMessage())
                 .build();
     }
 

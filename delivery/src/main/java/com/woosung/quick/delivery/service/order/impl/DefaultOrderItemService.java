@@ -1,10 +1,16 @@
 package com.woosung.quick.delivery.service.order.impl;
 
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderItemCommand;
+import com.woosung.quick.delivery.entity.StoreMenuEntity;
+import com.woosung.quick.delivery.payload.request.OrderRequest.CreateOrderItemRequest;
+import com.woosung.quick.delivery.payload.request.OrderRequest.ValidateTotalPointRequest;
 import com.woosung.quick.delivery.repository.order.OrderItemRepository;
+import com.woosung.quick.delivery.repository.order.jpa.StoreMenuJpaRepository;
 import com.woosung.quick.delivery.service.order.OrderItemService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +20,7 @@ import static com.woosung.quick.delivery.payload.response.OrderResponse.*;
 @RequiredArgsConstructor
 public class DefaultOrderItemService implements OrderItemService {
     private final OrderItemRepository orderItemRepository;
+    private final StoreMenuJpaRepository storeMenuJpaRepository;
 
     @Override
     public CreateOrderItemResponse createOrderItem(List<CreateOrderItemCommand> commands) {

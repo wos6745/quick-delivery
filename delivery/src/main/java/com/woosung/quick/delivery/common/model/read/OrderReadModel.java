@@ -8,6 +8,9 @@ import java.util.List;
 
 public class OrderReadModel {
 
+    @Builder
+    public record OrderAmountCalculatorResult(boolean result) { }
+
     public record OrderResult(
             String orderId,
             String customerId,

@@ -1,8 +1,10 @@
 package com.woosung.quick.delivery.payload.request;
 
+import com.woosung.quick.delivery.payload.response.OrderResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Builder;
 
 import java.util.List;
 
@@ -35,7 +37,10 @@ public class OrderRequest {
             String customerAddress,
             @NotBlank(message = "customerNumber is required")
             @Schema(description = "고객 전화 번호", requiredMode = Schema.RequiredMode.REQUIRED)
-            String customerNumber
+            String customerNumber,
+            @NotEmpty(message = "주문 금액 is required")
+            @Schema(description = "주문 금액", requiredMode = Schema.RequiredMode.REQUIRED)
+            Long totalPoints
     ) {}
 
     public record CreateOrderStoreRequest(
@@ -47,4 +52,14 @@ public class OrderRequest {
             @Schema(description = "고객 매장 메뉴들", requiredMode = Schema.RequiredMode.REQUIRED)
             List<CreateOrderItemRequest> orderItem
     ) { }
+
+    @Builder
+    public record ValidateTotalPointRequest (List<CreateOrderItemRequest> list, Long totalPoints) {
+        public static ValidateTotalPointRequest of (List<CreateOrderItemRequest> list, Long totalPoints) {
+            return ValidateTotalPointRequest.builder()
+                    .list(list)
+                    .totalPoints(totalPoints)
+                    .build();
+        }
+    }
 }
