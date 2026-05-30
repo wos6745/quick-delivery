@@ -1,15 +1,15 @@
 package com.woosung.quick.delivery.repository.payment;
 
-import com.woosung.quick.delivery.common.model.command.PaymentCommand;
-import com.woosung.quick.delivery.common.model.command.PaymentCommand.UpdateBalanceCommand;
-import com.woosung.quick.delivery.common.model.query.PaymentQuery;
+import com.woosung.quick.delivery.common.model.command.PaymentCommand.DeductCustomerBalanceCommand;
+import com.woosung.quick.delivery.common.model.command.PaymentCommand.RefundCustomerPointCommand;
 import com.woosung.quick.delivery.common.model.query.PaymentQuery.*;
-import com.woosung.quick.delivery.common.model.read.PaymentReadModel;
 import com.woosung.quick.delivery.common.model.read.PaymentReadModel.*;
-import com.woosung.quick.delivery.common.model.write.PaymentWriteModel;
-import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.UpdateCustomerBalanceResult;
+import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.DeductCustomerBalanceResult;
+import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.RefundCustomerPointResult;
 
 public interface PaymentRepository {
     SelectCustomerBalanceResult selectCustomerBalance(SelectCustomerBalanceQuery query);
-    UpdateCustomerBalanceResult updateCustomerBalance(UpdateBalanceCommand command);
+    DeductCustomerBalanceResult deductCustomerBalance(DeductCustomerBalanceCommand command);
+    RefundCustomerPointResult refundCustomerPoint(RefundCustomerPointCommand command);
+
 }

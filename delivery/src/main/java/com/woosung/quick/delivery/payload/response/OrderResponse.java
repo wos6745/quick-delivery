@@ -19,7 +19,7 @@ public class OrderResponse {
     public record GetOrdersResponse(List<OrderReadModel.OrderResult> orders) { }
     @Builder
     public record  GetOrderResponse(
-            String orderId,
+            Long orderId,
             String customerId,
             String customerName,
             String customerAddress,
@@ -69,6 +69,7 @@ public class OrderResponse {
     }
 
     @Builder
-    public record ValidateTotalPointResponse (boolean result, Long outputTotalPoints, Long inputTotalPoints) {
-    }
+    public record ValidateTotalPointResponse (boolean result, Long outputTotalPoints, Long inputTotalPoints) { }
+
+
 }

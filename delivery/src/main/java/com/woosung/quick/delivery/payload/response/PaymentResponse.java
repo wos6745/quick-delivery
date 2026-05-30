@@ -20,12 +20,5 @@ public class PaymentResponse {
         }
     }
 
-    @Builder
-    public record UsePointResponse(
-            Long id,
-            String customerId,
-            boolean result,
-            Long balance
-    ) {
-    }
+
 }

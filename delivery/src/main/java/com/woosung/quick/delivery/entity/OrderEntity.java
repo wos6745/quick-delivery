@@ -27,7 +27,7 @@ public class OrderEntity extends JpaBaseTimeEntity {
     private Long id;
 
     @Column(unique = true)
-    private String orderId;
+    private Long orderId;
     private String customerId;
     private String customerName;
     private String customerAddress;

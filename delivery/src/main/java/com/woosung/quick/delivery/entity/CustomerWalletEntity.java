@@ -35,4 +35,8 @@ public class CustomerWalletEntity extends JpaBaseTimeEntity {
 
         this.pointBalance -= point;
     }
+
+    public void refund(Long point) {
+        this.pointBalance += point;
+    }
 }

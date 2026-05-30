@@ -28,7 +28,7 @@ public class OrderController {
     }
 
     @GetMapping(path = "/{orderId}")
-    public QuickDeliveryResponse getOrder(@PathVariable("orderId") String orderId) {
+    public QuickDeliveryResponse getOrder(@PathVariable("orderId") Long orderId) {
         GetOrderResponse res = orderService.getOrder(orderId);
 
         return QuickDeliveryResponse.builder()
@@ -52,7 +52,7 @@ public class OrderController {
     @PatchMapping(path = "/{orderId}")
     public QuickDeliveryResponse cancelOrder(@RequestBody CancelOrderRequest req,
                                              @PathVariable("orderId") Long orderId) {
-        CancelOrderResponse res = orderService.cancelOrderByCustomer(req, orderId);
+        CancelOrderResponse res = orderService.cancelOrder(req, orderId);
 
         return QuickDeliveryResponse.builder()
                 .code(ResultCode.SUCCESS.getCode())

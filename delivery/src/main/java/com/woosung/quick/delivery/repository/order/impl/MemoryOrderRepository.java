@@ -10,6 +10,7 @@ import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrder
 import com.woosung.quick.delivery.repository.order.OrderRepository;
 import com.woosung.quick.delivery.repository.order.jpa.OrderJpaRepository;
 import com.woosung.quick.delivery.repository.order.jpa.querydsl.JpaQueryOrderRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -47,7 +48,7 @@ public class MemoryOrderRepository implements OrderRepository {
     public CreateOrderResult insertOrder(CreateOrderCommand command) {
         OrderEntity entity = OrderEntity.builder()
                 .orderStatus(OrderStatus.PENDING)
-                .orderId(orderJpaRepository.getNextOrderSequence().toString())
+                .orderId(orderJpaRepository.getNextOrderSequence())
                 .customerAddress(command.customerAddress())
                 .customerName(command.customerName())
                 .customerId(command.customerId())
@@ -64,11 +65,14 @@ public class MemoryOrderRepository implements OrderRepository {
 
     @Override
     public CancelOrderResult cancelOrder(CancelOrderCommand command) {
-        OrderEntity orderEntity = orderJpaRepository.getOrderEntityByOrderId(command.orderId());
+        OrderEntity orderEntity = orderJpaRepository.findByOrderId(command.orderId())
+                .orElseThrow(EntityNotFoundException::new);
         orderEntity.cancelOrder(command);
 
         return CancelOrderResult.builder()
                 .result(true)
+                .id(orderEntity.getId())
+                .orderId(orderEntity.getOrderId())
                 .build();
     }
 }

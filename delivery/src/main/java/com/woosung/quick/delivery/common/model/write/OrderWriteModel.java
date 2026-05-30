@@ -4,7 +4,7 @@ import lombok.Builder;
 
 public class OrderWriteModel {
     @Builder
-    public record CancelOrderResult (boolean result) { }
+    public record CancelOrderResult (boolean result, Long id, Long orderId) { }
 
     @Builder
     public record CreateOrderResult (Long id, boolean result) { }

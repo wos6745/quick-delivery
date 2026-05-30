@@ -1,6 +1,10 @@
 package com.woosung.quick.delivery.repository.order.impl;
 
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderStoreCommand;
+import com.woosung.quick.delivery.common.model.query.OrderQuery;
+import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrderStoresQuery;
+import com.woosung.quick.delivery.common.model.read.OrderReadModel;
+import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderStoresResult;
 import com.woosung.quick.delivery.entity.OrderEntity;
 import com.woosung.quick.delivery.entity.OrderStoreEntity;
 import com.woosung.quick.delivery.entity.StoreEntity;
@@ -12,6 +16,8 @@ import com.woosung.quick.delivery.repository.order.jpa.StoreJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -42,4 +48,18 @@ public class MemoryOrderStoreRepository implements OrderStoreRepository {
                 .build();
     }
 
+    @Override
+    public SelectOrderStoresResult selectOrderStores(SelectOrderStoresQuery query) {
+        List<OrderStoreEntity> orderStoreEntities = orderStoreJpaRepository.findByOrder_OrderId(query.orderId())
+                .orElseThrow(EntityNotFoundException::new);
+        
+        List<Long> orderStoreIds = orderStoreEntities.stream()
+                .map(OrderStoreEntity::getOrderStoreId)
+                .toList();
+
+        return SelectOrderStoresResult
+                .builder()
+                .orderStoreIds(orderStoreIds)
+                .build();
+    }
 }

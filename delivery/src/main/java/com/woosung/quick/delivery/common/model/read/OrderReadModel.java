@@ -12,7 +12,7 @@ public class OrderReadModel {
     public record OrderAmountCalculatorResult(boolean result) { }
 
     public record OrderResult(
-            String orderId,
+            Long orderId,
             String customerId,
             String customerName,
             String customerAddress,
@@ -35,7 +35,7 @@ public class OrderReadModel {
     ) { }
 
     public record SelectOrdersDTO(
-            String orderId,
+            Long orderId,
             String customerId,
             String customerName,
             String customerAddress,
@@ -54,7 +54,7 @@ public class OrderReadModel {
     }
 
     public record SelectOrderDTO(
-            String orderId,
+            Long orderId,
             String customerId,
             String customerName,
             String customerAddress,
@@ -80,4 +80,20 @@ public class OrderReadModel {
             List<SelectOrderDTO> order
     ) {
     }
+
+    @Builder
+    public record GetOrderTotalPointsResult(boolean result, Long totalPoints) { }
+
+    @Builder
+    public record SelectOrderStoresResult(List<Long> orderStoreIds) { }
+    @Builder
+    public record GetOrderItemsTotalPointsResult(Long totalPoints) {
+        public static GetOrderItemsTotalPointsResult of(SelectOrderItemsTotalPointResult result) {
+            return GetOrderItemsTotalPointsResult.builder()
+                    .totalPoints(result.totalPoints())
+                    .build();
+        }
+    }
+    @Builder
+    public record SelectOrderItemsTotalPointResult(Long totalPoints) {}
 }

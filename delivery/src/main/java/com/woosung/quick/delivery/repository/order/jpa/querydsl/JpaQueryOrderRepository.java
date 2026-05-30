@@ -53,7 +53,7 @@ public class JpaQueryOrderRepository {
                 .fetch();
     }
 
-    public List<SelectOrderDTO> selectOrderByOrderId(String OrderId) {
+    public List<SelectOrderDTO> selectOrderByOrderId(Long orderId) {
 
         return jpaQueryFactory
                 .select(new QOrderReadModel_SelectOrderDTO(
@@ -80,7 +80,7 @@ public class JpaQueryOrderRepository {
                 .on(storeEntity.id.eq(orderStoreEntity.store.id))
                 .innerJoin(storeMenuEntity)
                 .on(storeMenuEntity.id.eq(orderItemEntity.storeMenu.id))
-                .where(orderEntity.orderId.eq(OrderId))
+                .where(orderEntity.orderId.eq(orderId))
                 .fetch();
     }
 }

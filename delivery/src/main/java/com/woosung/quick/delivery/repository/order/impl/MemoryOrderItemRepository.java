@@ -1,6 +1,10 @@
 package com.woosung.quick.delivery.repository.order.impl;
 
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderItemCommand;
+import com.woosung.quick.delivery.common.model.query.OrderQuery;
+import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrderItemsTotalPointsQuery;
+import com.woosung.quick.delivery.common.model.read.OrderReadModel;
+import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderItemsTotalPointResult;
 import com.woosung.quick.delivery.entity.OrderItemEntity;
 import com.woosung.quick.delivery.entity.OrderStoreEntity;
 import com.woosung.quick.delivery.entity.StoreMenuEntity;
@@ -42,6 +46,15 @@ public class MemoryOrderItemRepository implements OrderItemRepository {
         return CreateOrderItemResult.builder()
                 .id(result.getId())
                 .result(true)
+                .build();
+    }
+
+    @Override
+    public SelectOrderItemsTotalPointResult selectOrderItemsTotalPoints(SelectOrderItemsTotalPointsQuery query) {
+        Long totalPoints = orderItemJpaRepository.getOrderItemsTotalPointByStoreIds(query.orderStoreIds());
+
+        return SelectOrderItemsTotalPointResult.builder()
+                .totalPoints(totalPoints)
                 .build();
     }
 }

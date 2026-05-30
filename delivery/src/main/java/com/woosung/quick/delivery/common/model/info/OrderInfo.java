@@ -5,7 +5,7 @@ import com.woosung.quick.delivery.common.Supports.OrderStatus;
 import java.util.Map;
 
 public record OrderInfo(
-        String orderId,
+        Long orderId,
         String customerId,
         String customerName,
         String customerAddress,

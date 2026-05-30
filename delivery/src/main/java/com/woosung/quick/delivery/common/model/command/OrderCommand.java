@@ -1,6 +1,7 @@
 package com.woosung.quick.delivery.common.model.command;
 
 import com.woosung.quick.delivery.common.Supports;
+import com.woosung.quick.delivery.common.Supports.OrderStatus;
 import lombok.Builder;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import static com.woosung.quick.delivery.payload.request.OrderRequest.*;
 
 public class OrderCommand {
     @Builder
-    public record CancelOrderCommand (Long orderId, String cancelMessage, Supports.OrderStatus orderStatus) {
+    public record CancelOrderCommand (Long orderId, String cancelMessage, OrderStatus orderStatus) {
         public static CancelOrderCommand of(CancelOrderRequest req, Long orderId) {
             return CancelOrderCommand.builder()
                     .cancelMessage(req.cancelMessage())

@@ -1,31 +1,26 @@
 package com.woosung.quick.delivery.service.order.impl;
 
-import com.woosung.quick.delivery.common.Supports;
 import com.woosung.quick.delivery.common.Supports.ErrorCode;
 import com.woosung.quick.delivery.common.exception.InvalidTotalPointsException;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CancelOrderCommand;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderCommand;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderStoreCommand;
 import com.woosung.quick.delivery.common.model.command.PaymentCommand;
-import com.woosung.quick.delivery.common.model.command.PaymentCommand.UpdateBalanceCommand;
+import com.woosung.quick.delivery.common.model.command.PaymentCommand.UsePointCommand;
 import com.woosung.quick.delivery.common.model.info.OrderInfo;
 import com.woosung.quick.delivery.common.model.info.StoreInfo;
+import com.woosung.quick.delivery.common.model.query.OrderQuery.GetOrderTotalPointsQuery;
 import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrderQuery;
 import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrdersQuery;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.*;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderResult;
 import com.woosung.quick.delivery.common.model.write.PaymentWriteModel;
-import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.UpdateCustomerBalanceResult;
-import com.woosung.quick.delivery.payload.response.OrderResponse;
+import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.UsePointResult;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrderResponse;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrdersResponse;
 import com.woosung.quick.delivery.payload.response.OrderResponse.ValidateTotalPointResponse;
-import com.woosung.quick.delivery.payload.response.PaymentResponse;
-import com.woosung.quick.delivery.payload.response.PaymentResponse.UsePointResponse;
 import com.woosung.quick.delivery.repository.order.OrderRepository;
-import com.woosung.quick.delivery.repository.payment.PaymentRepository;
-import com.woosung.quick.delivery.service.order.OrderItemService;
 import com.woosung.quick.delivery.service.order.OrderService;
 import com.woosung.quick.delivery.service.order.OrderStoreService;
 import com.woosung.quick.delivery.service.order.verifier.OrderAmountVerifier;
@@ -36,7 +31,6 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.woosung.quick.delivery.payload.response.OrderResponse.CancelOrderResponse;
 import static com.woosung.quick.delivery.payload.response.OrderResponse.CreateOrderResponse;
@@ -57,7 +51,7 @@ public class DefaultOrderService implements OrderService {
                 .customerId(customerId)
                 .build();
         SelectOrdersResult response = orderRepository.selectOrders(selectOrdersQuery);
-        Map<String, OrderInfo> orderMap = new LinkedHashMap<>();
+        Map<Long, OrderInfo> orderMap = new LinkedHashMap<>();
 
         for (SelectOrdersDTO row : response.orders()) {
             OrderInfo order = orderMap.computeIfAbsent(
@@ -107,7 +101,7 @@ public class DefaultOrderService implements OrderService {
     }
 
     @Override
-    public GetOrderResponse getOrder(String orderId) {
+    public GetOrderResponse getOrder(Long orderId) {
         SelectOrderQuery selectOrderQuery = SelectOrderQuery.builder()
                 .orderId(orderId)
                 .build();
@@ -163,7 +157,12 @@ public class DefaultOrderService implements OrderService {
             throw new InvalidTotalPointsException(ErrorCode.INVALID_TOTAL_POINTS);
         }
 
-        UsePointResponse usePointResponse = paymentService.usePoint(req.customerId(), req.totalPoints());
+        UsePointCommand usePointCommand = UsePointCommand.builder()
+                .point(req.totalPoints())
+                .customerId(req.customerId())
+                .build();
+
+        paymentService.usePoint(usePointCommand);
 
         return CreateOrderResponse.builder()
                 .result(true)
@@ -171,16 +170,23 @@ public class DefaultOrderService implements OrderService {
     }
 
     @Override
-    public CancelOrderResponse cancelOrderByStore(CancelOrderCommand command) {
-        CancelOrderResult cancelOrderResult = orderRepository.cancelOrder(command);
+    @Transactional
+    public CancelOrderResponse cancelOrder(CancelOrderRequest req, Long orderId) {
+        GetOrderTotalPointsQuery getOrderTotalPointsQuery = GetOrderTotalPointsQuery.builder()
+                .orderId(orderId)
+                .build();
 
-        return CancelOrderResponse.of(cancelOrderResult);
-    }
+        GetOrderTotalPointsResult orderTotalPoints = orderStoreService.getOrderTotalPoints(getOrderTotalPointsQuery);
 
-    @Override
-    public CancelOrderResponse cancelOrderByCustomer(CancelOrderRequest req, Long orderId) {
+        // customerId 필요
+        PaymentCommand.RefundPointCommand.builder()
+                        .point(orderTotalPoints.totalPoints())
+                        .build();
+
         CancelOrderCommand command = CancelOrderCommand.of(req, orderId);
         CancelOrderResult cancelOrderResult = orderRepository.cancelOrder(command);
+
+
 
         return CancelOrderResponse.of(cancelOrderResult);
     }
