@@ -61,8 +61,7 @@ public class DefaultPaymentService implements PaymentService {
     @Override
     @Retryable(
             value = OptimisticLockingFailureException.class,
-            maxRetries = 3,
-            excludes = NotEnoughBalanceException.class
+            maxRetries = 3
     )
     @Transactional
     public RefundPointResult refundPoint(RefundPointCommand command) {

@@ -6,6 +6,7 @@ import com.woosung.quick.delivery.common.model.command.OrderCommand.CancelOrderC
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderCommand;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderStoreCommand;
 import com.woosung.quick.delivery.common.model.command.PaymentCommand;
+import com.woosung.quick.delivery.common.model.command.PaymentCommand.RefundPointCommand;
 import com.woosung.quick.delivery.common.model.command.PaymentCommand.UsePointCommand;
 import com.woosung.quick.delivery.common.model.info.OrderInfo;
 import com.woosung.quick.delivery.common.model.info.StoreInfo;
@@ -16,6 +17,7 @@ import com.woosung.quick.delivery.common.model.read.OrderReadModel.*;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderResult;
 import com.woosung.quick.delivery.common.model.write.PaymentWriteModel;
+import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.RefundPointResult;
 import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.UsePointResult;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrderResponse;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrdersResponse;
@@ -179,14 +181,15 @@ public class DefaultOrderService implements OrderService {
         GetOrderTotalPointsResult orderTotalPoints = orderStoreService.getOrderTotalPoints(getOrderTotalPointsQuery);
 
         // customerId 필요
-        PaymentCommand.RefundPointCommand.builder()
-                        .point(orderTotalPoints.totalPoints())
-                        .build();
+        RefundPointCommand refundPointCommand = RefundPointCommand.builder()
+                .point(orderTotalPoints.totalPoints())
+                .customerId(req.customerId())
+                .build();
 
         CancelOrderCommand command = CancelOrderCommand.of(req, orderId);
         CancelOrderResult cancelOrderResult = orderRepository.cancelOrder(command);
 
-
+        RefundPointResult refundPointResult = paymentService.refundPoint(refundPointCommand);
 
         return CancelOrderResponse.of(cancelOrderResult);
     }
