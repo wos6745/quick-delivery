@@ -9,4 +9,6 @@ public interface OrderService {
     GetOrderResponse getOrder(Long orderId);
     CreateOrderResponse createOrder(CreateOrderRequest req);
     CancelOrderResponse cancelOrder(CancelOrderRequest req, Long orderId);
+    AcceptOrderResponse acceptOrder(AcceptOrderRequest req, Long orderId);
+
 }

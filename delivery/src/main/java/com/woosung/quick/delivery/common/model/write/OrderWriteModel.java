@@ -7,6 +7,9 @@ public class OrderWriteModel {
     public record CancelOrderResult (boolean result, Long id, Long orderId) { }
 
     @Builder
+    public record AcceptOrderResult (boolean result, Long id, Long orderId) {}
+
+    @Builder
     public record CreateOrderResult (Long id, boolean result) { }
 
     @Builder

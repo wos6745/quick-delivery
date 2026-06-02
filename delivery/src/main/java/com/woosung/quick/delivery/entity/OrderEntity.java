@@ -1,7 +1,8 @@
 package com.woosung.quick.delivery.entity;
 
 
-import com.woosung.quick.delivery.common.model.command.OrderCommand.CancelOrderCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.*;
 import com.woosung.quick.delivery.entity.base.JpaBaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -42,5 +43,9 @@ public class OrderEntity extends JpaBaseTimeEntity {
     public void cancelOrder(CancelOrderCommand command) {
         this.orderStatus = command.orderStatus();
         this.cancelMessage = command.cancelMessage();
+    }
+
+    public void acceptOrder(AcceptOrderCommand command) {
+        this.orderStatus = command.orderStatus();
     }
 }

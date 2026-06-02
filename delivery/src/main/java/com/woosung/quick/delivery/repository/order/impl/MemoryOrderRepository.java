@@ -1,5 +1,7 @@
 package com.woosung.quick.delivery.repository.order.impl;
 
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.AcceptOrderResult;
 import com.woosung.quick.delivery.entity.OrderEntity;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderDTO;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderResult;
@@ -70,6 +72,20 @@ public class MemoryOrderRepository implements OrderRepository {
         orderEntity.cancelOrder(command);
 
         return CancelOrderResult.builder()
+                .result(true)
+                .id(orderEntity.getId())
+                .orderId(orderEntity.getOrderId())
+                .build();
+    }
+
+    @Override
+    public AcceptOrderResult acceptOrder(AcceptOrderCommand command) {
+        OrderEntity orderEntity = orderJpaRepository.findByOrderId(command.orderId())
+                .orElseThrow(EntityNotFoundException::new);
+
+        orderEntity.acceptOrder(command);
+
+        return AcceptOrderResult.builder()
                 .result(true)
                 .id(orderEntity.getId())
                 .orderId(orderEntity.getOrderId())

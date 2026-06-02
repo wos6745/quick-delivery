@@ -12,6 +12,7 @@ import static com.woosung.quick.delivery.common.Supports.*;
 
 public class OrderRequest {
     public record CancelOrderRequest (OrderStatus orderStatus, String cancelMessage, String customerId) { }
+    public record AcceptOrderRequest (OrderStatus orderStatus) {}
     public record CreateOrderItemRequest(
             @NotBlank(message = "storeMenuId is required")
             @Schema(description = "매장 메뉴 Id", requiredMode = Schema.RequiredMode.REQUIRED)

@@ -49,12 +49,22 @@ public class OrderController {
 
     }
 
-    @PatchMapping(path = "/{orderId}")
+    @PatchMapping(path = "/{orderId}/cancel")
     public QuickDeliveryResponse cancelOrder(@RequestBody CancelOrderRequest req,
                                              @PathVariable("orderId") Long orderId) {
         CancelOrderResponse res = orderService.cancelOrder(req, orderId);
 
-        
+        return QuickDeliveryResponse.builder()
+                .code(ResultCode.SUCCESS.getCode())
+                .message(ResultCode.SUCCESS.getInfoMessage())
+                .data(res)
+                .build();
+    }
+
+    @PatchMapping(path = "/{orderId}/accept")
+    public QuickDeliveryResponse acceptOrder(@RequestBody AcceptOrderRequest req,
+                                             @PathVariable("orderId") Long orderId) {
+        AcceptOrderResponse res = orderService.acceptOrder(req, orderId);
 
         return QuickDeliveryResponse.builder()
                 .code(ResultCode.SUCCESS.getCode())

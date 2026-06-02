@@ -39,6 +39,9 @@ public class OrderResponse {
     }
 
     @Builder
+    public record AcceptOrderResponse(boolean result) { }
+
+    @Builder
     public record CreateOrderItemResponse (Long id, boolean result) {
         public static CreateOrderItemResponse of (CreateOrderItemResult result) {
             return CreateOrderItemResponse.builder()

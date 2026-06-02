@@ -21,6 +21,16 @@ public class OrderCommand {
     }
 
     @Builder
+    public record AcceptOrderCommand(Long orderId, OrderStatus orderStatus) {
+        public static AcceptOrderCommand of(AcceptOrderRequest req, Long orderId) {
+            return AcceptOrderCommand.builder()
+                    .orderId(orderId)
+                    .orderStatus(req.orderStatus())
+                    .build();
+        }
+    }
+
+    @Builder
     public record CreateOrderCommand (String customerId, String customerName, String customerAddress, String customerPhoneNumber) {
         public static CreateOrderCommand of(CreateOrderRequest req) {
             return CreateOrderCommand.builder()
