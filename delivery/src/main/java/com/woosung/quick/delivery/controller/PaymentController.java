@@ -1,8 +1,6 @@
 package com.woosung.quick.delivery.controller;
 
-import com.woosung.quick.delivery.common.Supports;
 import com.woosung.quick.delivery.global.QuickDeliveryResponse;
-import com.woosung.quick.delivery.payload.response.PaymentResponse;
 import com.woosung.quick.delivery.payload.response.PaymentResponse.GetBalanceResponse;
 import com.woosung.quick.delivery.service.payment.PaymentService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +15,7 @@ public class PaymentController {
     private final PaymentService paymentService;
 
     @GetMapping("/balance")
-    QuickDeliveryResponse getPayments(@RequestParam("customerId") String customerId) {
+    QuickDeliveryResponse getBalance(@RequestParam("customerId") String customerId) {
         GetBalanceResponse res = paymentService.getBalance(customerId);
 
         return QuickDeliveryResponse.builder()
