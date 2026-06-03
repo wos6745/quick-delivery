@@ -1,16 +1,14 @@
 package com.woosung.quick.delivery.service.order.impl;
 
-import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderItemCommand;
-import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderStoreCommand;
-import com.woosung.quick.delivery.common.model.query.OrderQuery;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.InsertOrderItemCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.InsertOrderStoreCommand;
 import com.woosung.quick.delivery.common.model.query.OrderQuery.GetOrderItemsTotalPointsQuery;
 import com.woosung.quick.delivery.common.model.query.OrderQuery.GetOrderTotalPointsQuery;
 import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrderStoresQuery;
-import com.woosung.quick.delivery.common.model.read.OrderReadModel;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.GetOrderItemsTotalPointsResult;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.GetOrderTotalPointsResult;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderStoresResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderStoreResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.InsertOrderStoreResult;
 import com.woosung.quick.delivery.repository.order.OrderStoreRepository;
 import com.woosung.quick.delivery.service.order.OrderItemService;
 import com.woosung.quick.delivery.service.order.OrderStoreService;
@@ -29,13 +27,13 @@ public class DefaultOrderStoreService implements OrderStoreService {
 
 
     @Override
-    public CreateOrderStoreResponse createOrderStore(List<CreateOrderStoreCommand> commands) {
+    public CreateOrderStoreResponse createOrderStore(List<InsertOrderStoreCommand> commands) {
         commands.forEach(x -> {
-            CreateOrderStoreResult orderStoreRes = orderStoreRepository.insertOrderStore(x);
+            InsertOrderStoreResult orderStoreRes = orderStoreRepository.insertOrderStore(x);
 
-            List<CreateOrderItemCommand> orderItemCommands = x.orderItemRequests()
+            List<InsertOrderItemCommand> orderItemCommands = x.orderItemRequests()
                     .stream()
-                    .map(y -> CreateOrderItemCommand.of(y, orderStoreRes.id()))
+                    .map(y -> InsertOrderItemCommand.of(y, orderStoreRes.id()))
                     .toList();
 
             CreateOrderItemResponse orderItem = orderItemService.createOrderItem(orderItemCommands);

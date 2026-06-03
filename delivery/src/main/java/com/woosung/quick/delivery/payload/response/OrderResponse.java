@@ -4,11 +4,9 @@ import com.woosung.quick.delivery.common.Supports.OrderStatus;
 import com.woosung.quick.delivery.common.model.info.StoreInfo;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderItemResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderStoreResult;
-import com.woosung.quick.delivery.payload.request.OrderRequest;
-import com.woosung.quick.delivery.payload.request.OrderRequest.CreateOrderItemRequest;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.InsertOrderItemResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.InsertOrderResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.InsertOrderStoreResult;
 import lombok.Builder;
 
 import java.util.List;
@@ -43,7 +41,7 @@ public class OrderResponse {
 
     @Builder
     public record CreateOrderItemResponse (Long id, boolean result) {
-        public static CreateOrderItemResponse of (CreateOrderItemResult result) {
+        public static CreateOrderItemResponse of (InsertOrderItemResult result) {
             return CreateOrderItemResponse.builder()
                     .id(result.id())
                     .result(result.result())
@@ -53,7 +51,7 @@ public class OrderResponse {
 
     @Builder
     public record CreateOrderResponse (Long id, boolean result) {
-        public static CreateOrderResponse of (CreateOrderResult result) {
+        public static CreateOrderResponse of (InsertOrderResult result) {
             return CreateOrderResponse.builder()
                     .id(result.id())
                     .result(result.result())
@@ -63,7 +61,7 @@ public class OrderResponse {
 
     @Builder
     public record CreateOrderStoreResponse (Long id, boolean result) {
-        public static CreateOrderStoreResponse of (CreateOrderStoreResult result) {
+        public static CreateOrderStoreResponse of (InsertOrderStoreResult result) {
             return CreateOrderStoreResponse.builder()
                     .id(result.id())
                     .result(result.result())

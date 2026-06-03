@@ -2,12 +2,10 @@ package com.woosung.quick.delivery.service.order.impl;
 
 import com.woosung.quick.delivery.common.Supports.ErrorCode;
 import com.woosung.quick.delivery.common.exception.InvalidTotalPointsException;
-import com.woosung.quick.delivery.common.model.command.OrderCommand;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.AcceptOrderCommand;
 import com.woosung.quick.delivery.common.model.command.OrderCommand.CancelOrderCommand;
-import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderCommand;
-import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderStoreCommand;
-import com.woosung.quick.delivery.common.model.command.PaymentCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.InsertOrderCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.InsertOrderStoreCommand;
 import com.woosung.quick.delivery.common.model.command.PaymentCommand.RefundPointCommand;
 import com.woosung.quick.delivery.common.model.command.PaymentCommand.UsePointCommand;
 import com.woosung.quick.delivery.common.model.info.OrderInfo;
@@ -16,14 +14,10 @@ import com.woosung.quick.delivery.common.model.query.OrderQuery.GetOrderTotalPoi
 import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrderQuery;
 import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrdersQuery;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.*;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.AcceptOrderResult;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderResult;
-import com.woosung.quick.delivery.common.model.write.PaymentWriteModel;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.InsertOrderResult;
 import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.RefundPointResult;
-import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.UsePointResult;
-import com.woosung.quick.delivery.payload.response.OrderResponse;
 import com.woosung.quick.delivery.payload.response.OrderResponse.AcceptOrderResponse;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrderResponse;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrdersResponse;
@@ -150,12 +144,12 @@ public class DefaultOrderService implements OrderService {
     @Override
     @Transactional
     public CreateOrderResponse createOrder(CreateOrderRequest req) {
-        CreateOrderCommand orderCommand = CreateOrderCommand.of(req);
-        CreateOrderResult createOrderResult = orderRepository.insertOrder(orderCommand);
+        InsertOrderCommand orderCommand = InsertOrderCommand.of(req);
+        InsertOrderResult createOrderResult = orderRepository.insertOrder(orderCommand);
 
-        List<CreateOrderStoreCommand> createOrderStoreCommands = req.orders().
+        List<InsertOrderStoreCommand> createOrderStoreCommands = req.orders().
                 stream().
-                map(x -> CreateOrderStoreCommand.of(x, createOrderResult.id()))
+                map(x -> InsertOrderStoreCommand.of(x, createOrderResult.id()))
                 .toList();
 
         orderStoreService.createOrderStore(createOrderStoreCommands);

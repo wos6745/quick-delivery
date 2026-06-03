@@ -10,10 +10,10 @@ public class OrderWriteModel {
     public record AcceptOrderResult (boolean result, Long id, Long orderId) {}
 
     @Builder
-    public record CreateOrderResult (Long id, boolean result) { }
+    public record InsertOrderResult(Long id, boolean result) { }
 
     @Builder
-    public record CreateOrderItemResult (Long id, boolean result) { }
+    public record InsertOrderItemResult(Long id, boolean result) { }
     @Builder
-    public record CreateOrderStoreResult (Long id, boolean result) { }
+    public record InsertOrderStoreResult(Long id, boolean result) { }
 }

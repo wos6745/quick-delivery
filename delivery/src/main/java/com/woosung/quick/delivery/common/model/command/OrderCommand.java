@@ -1,6 +1,5 @@
 package com.woosung.quick.delivery.common.model.command;
 
-import com.woosung.quick.delivery.common.Supports;
 import com.woosung.quick.delivery.common.Supports.OrderStatus;
 import lombok.Builder;
 
@@ -31,9 +30,9 @@ public class OrderCommand {
     }
 
     @Builder
-    public record CreateOrderCommand (String customerId, String customerName, String customerAddress, String customerPhoneNumber) {
-        public static CreateOrderCommand of(CreateOrderRequest req) {
-            return CreateOrderCommand.builder()
+    public record InsertOrderCommand(String customerId, String customerName, String customerAddress, String customerPhoneNumber) {
+        public static InsertOrderCommand of(CreateOrderRequest req) {
+            return InsertOrderCommand.builder()
                     .customerAddress(req.customerAddress())
                     .customerName(req.customerName())
                     .customerId(req.customerId())
@@ -44,9 +43,9 @@ public class OrderCommand {
     }
 
     @Builder
-    public record CreateOrderItemCommand (Long storeMenuId, int count, Long orderStoreId) {
-        public static CreateOrderItemCommand of (CreateOrderItemRequest req, Long orderStoreId) {
-            return CreateOrderItemCommand.builder()
+    public record InsertOrderItemCommand(Long storeMenuId, int count, Long orderStoreId) {
+        public static InsertOrderItemCommand of (CreateOrderItemRequest req, Long orderStoreId) {
+            return InsertOrderItemCommand.builder()
                     .count(req.count())
                     .storeMenuId(req.storeMenuId())
                     .orderStoreId(orderStoreId)
@@ -55,9 +54,9 @@ public class OrderCommand {
     }
 
     @Builder
-    public record CreateOrderStoreCommand (Long orderId, Long storeId, List<CreateOrderItemRequest> orderItemRequests) {
-        public static CreateOrderStoreCommand of(CreateOrderStoreRequest req, Long orderId) {
-            return CreateOrderStoreCommand.builder()
+    public record InsertOrderStoreCommand(Long orderId, Long storeId, List<CreateOrderItemRequest> orderItemRequests) {
+        public static InsertOrderStoreCommand of(CreateOrderStoreRequest req, Long orderId) {
+            return InsertOrderStoreCommand.builder()
                     .orderId(orderId)
                     .storeId(req.storeId())
                     .orderItemRequests(req.orderItem())

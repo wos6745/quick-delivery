@@ -1,14 +1,12 @@
 package com.woosung.quick.delivery.repository.order.impl;
 
-import com.woosung.quick.delivery.common.model.command.OrderCommand.CreateOrderItemCommand;
-import com.woosung.quick.delivery.common.model.query.OrderQuery;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.InsertOrderItemCommand;
 import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrderItemsTotalPointsQuery;
-import com.woosung.quick.delivery.common.model.read.OrderReadModel;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderItemsTotalPointResult;
 import com.woosung.quick.delivery.entity.OrderItemEntity;
 import com.woosung.quick.delivery.entity.OrderStoreEntity;
 import com.woosung.quick.delivery.entity.StoreMenuEntity;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderItemResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.InsertOrderItemResult;
 import com.woosung.quick.delivery.repository.order.OrderItemRepository;
 import com.woosung.quick.delivery.repository.order.jpa.OrderItemJpaRepository;
 import com.woosung.quick.delivery.repository.order.jpa.OrderStoreJpaRepository;
@@ -25,7 +23,7 @@ public class MemoryOrderItemRepository implements OrderItemRepository {
     private final StoreMenuJpaRepository storeMenuJpaRepository;
 
     @Override
-    public CreateOrderItemResult insertOrderItem(CreateOrderItemCommand command) {
+    public InsertOrderItemResult insertOrderItem(InsertOrderItemCommand command) {
         Long orderItemId = orderItemJpaRepository.getNextOrderItemSequence();
         OrderStoreEntity orderStoreEntity = orderStoreJpaRepository.findById(command.orderStoreId())
                 .orElseThrow(EntityNotFoundException::new);
@@ -43,7 +41,7 @@ public class MemoryOrderItemRepository implements OrderItemRepository {
 
         OrderItemEntity result = orderItemJpaRepository.save(orderItemEntity);
 
-        return CreateOrderItemResult.builder()
+        return InsertOrderItemResult.builder()
                 .id(result.getId())
                 .result(true)
                 .build();

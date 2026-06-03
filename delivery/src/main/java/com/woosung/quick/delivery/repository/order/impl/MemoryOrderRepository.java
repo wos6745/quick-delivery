@@ -1,6 +1,5 @@
 package com.woosung.quick.delivery.repository.order.impl;
 
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.AcceptOrderResult;
 import com.woosung.quick.delivery.entity.OrderEntity;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderDTO;
@@ -8,7 +7,7 @@ import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderRe
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrdersDTO;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrdersResult;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CreateOrderResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.InsertOrderResult;
 import com.woosung.quick.delivery.repository.order.OrderRepository;
 import com.woosung.quick.delivery.repository.order.jpa.OrderJpaRepository;
 import com.woosung.quick.delivery.repository.order.jpa.querydsl.JpaQueryOrderRepository;
@@ -47,7 +46,7 @@ public class MemoryOrderRepository implements OrderRepository {
     }
 
     @Override
-    public CreateOrderResult insertOrder(CreateOrderCommand command) {
+    public InsertOrderResult insertOrder(InsertOrderCommand command) {
         OrderEntity entity = OrderEntity.builder()
                 .orderStatus(OrderStatus.PENDING)
                 .orderId(orderJpaRepository.getNextOrderSequence())
@@ -59,7 +58,7 @@ public class MemoryOrderRepository implements OrderRepository {
 
         orderJpaRepository.save(entity);
 
-        return CreateOrderResult.builder()
+        return InsertOrderResult.builder()
                 .id(entity.getId())
                 .result(true)
                 .build();
