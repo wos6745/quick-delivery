@@ -35,6 +35,7 @@ public interface Supports {
         private final String infoMessage;
     }
 
+    @RequiredArgsConstructor
     enum OrderStatus {
         PENDING(100),
         CANCELED_STORE(200),
@@ -45,9 +46,17 @@ public interface Supports {
 
         @Getter
         private final int status;
+    }
 
-        OrderStatus(int status) {
-            this.status = status;
-        }
+    @RequiredArgsConstructor
+    enum DeliveryStatus {
+        CALL_WAITING(100),
+        CANCEL(200),
+        RIDER_ACCEPT(300),
+        RIDER_PICKUP(400),
+        COMPLETE(500);
+
+        @Getter
+        private final int status;
     }
 }

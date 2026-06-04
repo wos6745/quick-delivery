@@ -63,5 +63,6 @@ public class OrderCommand {
                     .build();
         }
     }
-
+    @Builder
+    public record DeliveringOrderCommand(Long orderId) {}
 }

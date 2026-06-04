@@ -1,5 +1,7 @@
 package com.woosung.quick.delivery.entity;
 
+import com.woosung.quick.delivery.common.Supports;
+import com.woosung.quick.delivery.common.Supports.DeliveryStatus;
 import com.woosung.quick.delivery.entity.base.JpaBaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -27,4 +29,13 @@ public class DeliveryEntity extends JpaBaseTimeEntity {
     private String riderRequestMessage;
 
     private Long riderId;
+    private DeliveryStatus status;
+
+    public void acceptDelivery() {
+        status = DeliveryStatus.RIDER_ACCEPT;
+    }
+
+    public void pickUpdelivery() {
+        status = DeliveryStatus.RIDER_PICKUP;
+    }
 }

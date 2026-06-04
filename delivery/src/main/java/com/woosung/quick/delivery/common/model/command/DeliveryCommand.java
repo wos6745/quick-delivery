@@ -1,6 +1,8 @@
 package com.woosung.quick.delivery.common.model.command;
 
-import com.woosung.quick.delivery.payload.request.StoreRequest.CallRiderRequest;
+import com.woosung.quick.delivery.common.Supports;
+import com.woosung.quick.delivery.common.Supports.DeliveryStatus;
+import com.woosung.quick.delivery.payload.request.DeliveryRequest.CallRiderRequest;
 import lombok.Builder;
 
 public class DeliveryCommand {
@@ -15,4 +17,9 @@ public class DeliveryCommand {
                     .build();
         }
     }
+
+    @Builder
+    public record AcceptDeliveryCommand(Long deliveryId) {}
+    @Builder
+    public record PickupDeliveryCommand(Long deliveryId) {}
 }

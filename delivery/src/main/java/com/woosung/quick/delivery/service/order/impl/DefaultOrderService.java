@@ -2,10 +2,8 @@ package com.woosung.quick.delivery.service.order.impl;
 
 import com.woosung.quick.delivery.common.Supports.ErrorCode;
 import com.woosung.quick.delivery.common.exception.InvalidTotalPointsException;
-import com.woosung.quick.delivery.common.model.command.OrderCommand.AcceptOrderCommand;
-import com.woosung.quick.delivery.common.model.command.OrderCommand.CancelOrderCommand;
-import com.woosung.quick.delivery.common.model.command.OrderCommand.InsertOrderCommand;
-import com.woosung.quick.delivery.common.model.command.OrderCommand.InsertOrderStoreCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand;
+import com.woosung.quick.delivery.common.model.command.OrderCommand.*;
 import com.woosung.quick.delivery.common.model.command.PaymentCommand.RefundPointCommand;
 import com.woosung.quick.delivery.common.model.command.PaymentCommand.UsePointCommand;
 import com.woosung.quick.delivery.common.model.info.OrderInfo;
@@ -14,8 +12,10 @@ import com.woosung.quick.delivery.common.model.query.OrderQuery.GetOrderTotalPoi
 import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrderQuery;
 import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrdersQuery;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.*;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.AcceptOrderResult;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.DeliveringOrderResult;
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel.InsertOrderResult;
 import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.RefundPointResult;
 import com.woosung.quick.delivery.payload.response.OrderResponse.AcceptOrderResponse;
@@ -202,6 +202,15 @@ public class DefaultOrderService implements OrderService {
         return AcceptOrderResponse.builder()
                 .result(acceptOrderResult.result())
                 .build();
+    }
+
+    @Override
+    public DeliveringOrderResult deliveringOrder(Long orderId) {
+        DeliveringOrderCommand deliveringOrderCommand = DeliveringOrderCommand.builder()
+                .orderId(orderId)
+                .build();
+
+        return orderRepository.deliveringOrder(deliveringOrderCommand);
     }
 
     private OrderAmountCalculatorResult orderAmountCalculator(List<CreateOrderStoreRequest> orders, Long totalPoints) {

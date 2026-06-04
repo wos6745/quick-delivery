@@ -16,4 +16,7 @@ public class OrderWriteModel {
     public record InsertOrderItemResult(Long id, boolean result) { }
     @Builder
     public record InsertOrderStoreResult(Long id, boolean result) { }
+
+    @Builder
+    public record DeliveringOrderResult(Long orderId, boolean result) {}
 }

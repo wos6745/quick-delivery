@@ -12,7 +12,7 @@ public interface OrderItemJpaRepository extends JpaRepository<OrderItemEntity, L
 
     @Query("SELECT sum(sm.menuPrice) " +
             "from OrderItemEntity oi " +
-            "Inner join oi.storeMenu sm "
+            "Inner join oi.storeMenu sm " +
             "WHERE oi.orderStore.id in :storeIds")
     Long getOrderItemsTotalPointByStoreIds(List<Long> storeIds);
 }

@@ -13,4 +13,5 @@ public interface OrderRepository {
     InsertOrderResult insertOrder(InsertOrderCommand command);
     CancelOrderResult cancelOrder(CancelOrderCommand command);
     AcceptOrderResult acceptOrder(AcceptOrderCommand command);
+    DeliveringOrderResult deliveringOrder(DeliveringOrderCommand command);
 }
