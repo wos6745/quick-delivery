@@ -22,4 +22,6 @@ public class DeliveryCommand {
     public record AcceptDeliveryCommand(Long deliveryId) {}
     @Builder
     public record PickupDeliveryCommand(Long deliveryId) {}
+    @Builder
+    public record CompleteDeliveryCommand(Long deliveryId) {}
 }

@@ -7,4 +7,5 @@ public interface DeliveryRepository {
     InsertDeliveryResult insertDelivery(InsertDeliveryCommand command);
     AcceptDeliveryResult acceptDelivery(AcceptDeliveryCommand command);
     PickupDeliveryResult pickDelivery(PickupDeliveryCommand command);
+    CompleteDeliveryResult completeDelivery(CompleteDeliveryCommand command);
 }

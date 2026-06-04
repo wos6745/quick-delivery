@@ -9,4 +9,6 @@ public class DeliveryWriteModel {
     public record AcceptDeliveryResult(boolean result, Long deliveryId) {}
     @Builder
     public record PickupDeliveryResult(boolean result, Long deliveryId, Long orderId) {}
+    @Builder
+    public record CompleteDeliveryResult(boolean result, Long deliveryId, Long orderId) {}
 }

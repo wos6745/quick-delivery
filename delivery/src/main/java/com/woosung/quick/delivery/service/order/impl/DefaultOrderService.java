@@ -12,12 +12,7 @@ import com.woosung.quick.delivery.common.model.query.OrderQuery.GetOrderTotalPoi
 import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrderQuery;
 import com.woosung.quick.delivery.common.model.query.OrderQuery.SelectOrdersQuery;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.*;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.AcceptOrderResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.DeliveringOrderResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.InsertOrderResult;
-import com.woosung.quick.delivery.common.model.write.PaymentWriteModel.RefundPointResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.*;
 import com.woosung.quick.delivery.payload.response.OrderResponse.AcceptOrderResponse;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrderResponse;
 import com.woosung.quick.delivery.payload.response.OrderResponse.GetOrdersResponse;
@@ -189,7 +184,7 @@ public class DefaultOrderService implements OrderService {
         CancelOrderCommand command = CancelOrderCommand.of(req, orderId);
         CancelOrderResult cancelOrderResult = orderRepository.cancelOrder(command);
 
-        RefundPointResult refundPointResult = paymentService.refundPoint(refundPointCommand);
+        paymentService.refundPoint(refundPointCommand);
 
         return CancelOrderResponse.of(cancelOrderResult);
     }
@@ -211,6 +206,15 @@ public class DefaultOrderService implements OrderService {
                 .build();
 
         return orderRepository.deliveringOrder(deliveringOrderCommand);
+    }
+
+    @Override
+    public DeliveredOrderResult deliveredOrder(Long orderId) {
+        DeliveredOrderCommand deliveredOrderCommand = DeliveredOrderCommand.builder()
+                .orderId(orderId)
+                .build();
+
+        return orderRepository.deliveredOrder(deliveredOrderCommand);
     }
 
     private OrderAmountCalculatorResult orderAmountCalculator(List<CreateOrderStoreRequest> orders, Long totalPoints) {

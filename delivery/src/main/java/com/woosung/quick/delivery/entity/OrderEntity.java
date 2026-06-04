@@ -52,4 +52,8 @@ public class OrderEntity extends JpaBaseTimeEntity {
     public void deliveringOrder() {
         this.orderStatus = OrderStatus.DELIVERING;
     }
+
+    public void deliveredOrder() {
+        this.orderStatus = OrderStatus.DELIVERED;
+    }
 }

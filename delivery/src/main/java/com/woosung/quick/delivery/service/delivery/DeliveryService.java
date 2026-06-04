@@ -7,4 +7,5 @@ public interface DeliveryService {
     CallRiderResponse callRider(CallRiderRequest req);
     AcceptDeliveryResponse acceptDelivery(Long deliveryId);
     PickUpDeliveryResponse pickUpDelivery(Long deliveryId);
+    CompleteDeliveryResponse completeDelivery(Long deliveryId);
 }

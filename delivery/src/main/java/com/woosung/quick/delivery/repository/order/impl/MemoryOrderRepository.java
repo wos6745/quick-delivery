@@ -1,15 +1,12 @@
 package com.woosung.quick.delivery.repository.order.impl;
 
 import com.woosung.quick.delivery.common.model.write.OrderWriteModel;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.AcceptOrderResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.DeliveringOrderResult;
+import com.woosung.quick.delivery.common.model.write.OrderWriteModel.*;
 import com.woosung.quick.delivery.entity.OrderEntity;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderDTO;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrderResult;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrdersDTO;
 import com.woosung.quick.delivery.common.model.read.OrderReadModel.SelectOrdersResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.CancelOrderResult;
-import com.woosung.quick.delivery.common.model.write.OrderWriteModel.InsertOrderResult;
 import com.woosung.quick.delivery.repository.order.OrderRepository;
 import com.woosung.quick.delivery.repository.order.jpa.OrderJpaRepository;
 import com.woosung.quick.delivery.repository.order.jpa.querydsl.JpaQueryOrderRepository;
@@ -70,8 +67,8 @@ public class MemoryOrderRepository implements OrderRepository {
     public CancelOrderResult cancelOrder(CancelOrderCommand command) {
         OrderEntity orderEntity = orderJpaRepository.findByOrderId(command.orderId())
                 .orElseThrow(EntityNotFoundException::new);
-        orderEntity.cancelOrder(command);
 
+        orderEntity.cancelOrder(command);
         return CancelOrderResult.builder()
                 .result(true)
                 .id(orderEntity.getId())
@@ -85,7 +82,6 @@ public class MemoryOrderRepository implements OrderRepository {
                 .orElseThrow(EntityNotFoundException::new);
 
         orderEntity.acceptOrder(command);
-
         return AcceptOrderResult.builder()
                 .result(true)
                 .id(orderEntity.getId())
@@ -100,6 +96,18 @@ public class MemoryOrderRepository implements OrderRepository {
 
         orderEntity.deliveringOrder();
         return DeliveringOrderResult.builder()
+                .result(true)
+                .orderId(orderEntity.getOrderId())
+                .build();
+    }
+
+    @Override
+    public DeliveredOrderResult deliveredOrder(DeliveredOrderCommand command) {
+        OrderEntity orderEntity = orderJpaRepository.findByOrderId(command.orderId())
+                .orElseThrow(EntityNotFoundException::new);
+
+        orderEntity.deliveredOrder();
+        return DeliveredOrderResult.builder()
                 .result(true)
                 .orderId(orderEntity.getOrderId())
                 .build();

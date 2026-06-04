@@ -55,9 +55,23 @@ public class MemoryDeliveryRepository implements DeliveryRepository {
     public PickupDeliveryResult pickDelivery(PickupDeliveryCommand command) {
         DeliveryEntity deliveryEntity = deliveryJpaRepository.findByDeliveryId(command.deliveryId())
                 .orElseThrow(EntityNotFoundException::new);
-        deliveryEntity.pickUpdelivery();
+        deliveryEntity.pickUpDelivery();
 
         return PickupDeliveryResult.builder()
+                .result(true)
+                .deliveryId(deliveryEntity.getDeliveryId())
+                .orderId(deliveryEntity.getOrder().getOrderId())
+                .build();
+    }
+
+    @Override
+    public CompleteDeliveryResult completeDelivery(CompleteDeliveryCommand command) {
+        DeliveryEntity deliveryEntity = deliveryJpaRepository.findByDeliveryId(command.deliveryId())
+                .orElseThrow(EntityNotFoundException::new);
+
+        deliveryEntity.completeDelivery();
+
+        return CompleteDeliveryResult.builder()
                 .result(true)
                 .deliveryId(deliveryEntity.getDeliveryId())
                 .orderId(deliveryEntity.getOrder().getOrderId())

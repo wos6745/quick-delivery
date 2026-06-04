@@ -65,4 +65,6 @@ public class OrderCommand {
     }
     @Builder
     public record DeliveringOrderCommand(Long orderId) {}
+    @Builder
+    public record DeliveredOrderCommand(Long orderId) {}
 }

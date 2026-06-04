@@ -2,16 +2,19 @@ package com.woosung.quick.delivery.service.delivery.impl;
 
 import com.woosung.quick.delivery.common.model.command.DeliveryCommand;
 import com.woosung.quick.delivery.common.model.command.DeliveryCommand.AcceptDeliveryCommand;
+import com.woosung.quick.delivery.common.model.command.DeliveryCommand.CompleteDeliveryCommand;
 import com.woosung.quick.delivery.common.model.command.DeliveryCommand.InsertDeliveryCommand;
 import com.woosung.quick.delivery.common.model.command.DeliveryCommand.PickupDeliveryCommand;
 import com.woosung.quick.delivery.common.model.write.DeliveryWriteModel;
 import com.woosung.quick.delivery.common.model.write.DeliveryWriteModel.AcceptDeliveryResult;
+import com.woosung.quick.delivery.common.model.write.DeliveryWriteModel.CompleteDeliveryResult;
 import com.woosung.quick.delivery.common.model.write.DeliveryWriteModel.InsertDeliveryResult;
 import com.woosung.quick.delivery.common.model.write.DeliveryWriteModel.PickupDeliveryResult;
 import com.woosung.quick.delivery.payload.request.DeliveryRequest.CallRiderRequest;
 import com.woosung.quick.delivery.payload.response.DeliveryResponse;
 import com.woosung.quick.delivery.payload.response.DeliveryResponse.AcceptDeliveryResponse;
 import com.woosung.quick.delivery.payload.response.DeliveryResponse.CallRiderResponse;
+import com.woosung.quick.delivery.payload.response.DeliveryResponse.CompleteDeliveryResponse;
 import com.woosung.quick.delivery.payload.response.DeliveryResponse.PickUpDeliveryResponse;
 import com.woosung.quick.delivery.repository.delivery.DeliveryRepository;
 import com.woosung.quick.delivery.service.delivery.DeliveryService;
@@ -58,8 +61,24 @@ public class DefaultDeliveryService implements DeliveryService {
 
         PickupDeliveryResult pickupDeliveryResult = deliveryRepository.pickDelivery(pickupDeliveryCommand);
 
+        orderService.deliveringOrder(pickupDeliveryResult.orderId());
 
+        return PickUpDeliveryResponse.builder()
+                .deliveryId(pickupDeliveryResult.deliveryId())
+                .build();
+    }
 
-        return null;
+    @Override
+    public CompleteDeliveryResponse completeDelivery(Long deliveryId) {
+        CompleteDeliveryCommand completeDeliveryCommand = CompleteDeliveryCommand.builder()
+                .deliveryId(deliveryId)
+                .build();
+
+        CompleteDeliveryResult completeDeliveryResult = deliveryRepository.completeDelivery(completeDeliveryCommand);
+        orderService.deliveredOrder(completeDeliveryResult.orderId());
+
+        return CompleteDeliveryResponse.builder()
+                .deliveryId(completeDeliveryCommand.deliveryId())
+                .build();
     }
 }

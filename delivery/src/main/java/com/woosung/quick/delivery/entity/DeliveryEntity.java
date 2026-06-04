@@ -35,7 +35,11 @@ public class DeliveryEntity extends JpaBaseTimeEntity {
         status = DeliveryStatus.RIDER_ACCEPT;
     }
 
-    public void pickUpdelivery() {
+    public void pickUpDelivery() {
         status = DeliveryStatus.RIDER_PICKUP;
+    }
+
+    public void completeDelivery() {
+        status = DeliveryStatus.COMPLETE;
     }
 }

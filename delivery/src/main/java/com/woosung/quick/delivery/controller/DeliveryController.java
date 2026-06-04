@@ -5,6 +5,7 @@ import com.woosung.quick.delivery.payload.request.DeliveryRequest.CallRiderReque
 import com.woosung.quick.delivery.payload.response.DeliveryResponse;
 import com.woosung.quick.delivery.payload.response.DeliveryResponse.AcceptDeliveryResponse;
 import com.woosung.quick.delivery.payload.response.DeliveryResponse.CallRiderResponse;
+import com.woosung.quick.delivery.payload.response.DeliveryResponse.CompleteDeliveryResponse;
 import com.woosung.quick.delivery.payload.response.DeliveryResponse.PickUpDeliveryResponse;
 import com.woosung.quick.delivery.service.delivery.DeliveryService;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,17 @@ public class DeliveryController {
     @PatchMapping("/{deliveryId}/pick-up")
     public QuickDeliveryResponse pickupDelivery(@PathVariable Long deliveryId) {
         PickUpDeliveryResponse res = deliveryService.pickUpDelivery(deliveryId);
+
+        return QuickDeliveryResponse.builder()
+                .code(ResultCode.SUCCESS.getCode())
+                .message(ResultCode.SUCCESS.getInfoMessage())
+                .data(res)
+                .build();
+    }
+
+    @PatchMapping("/{deliveryId}/complete")
+    public QuickDeliveryResponse completeDelivery(@PathVariable Long deliveryId) {
+        CompleteDeliveryResponse res = deliveryService.completeDelivery(deliveryId);
 
         return QuickDeliveryResponse.builder()
                 .code(ResultCode.SUCCESS.getCode())
